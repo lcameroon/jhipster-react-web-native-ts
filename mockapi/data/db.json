@@ -1,0 +1,31 @@
+{
+  "version": {
+    "data": "1.0.0"
+  },
+  "info": {
+    "activeProfiles": [
+      "dev"
+    ]
+  },
+  "authenticate": {
+    "id_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTUzMTczMTA0NSwiZXhwIjoxNTMxNzM0NjQ1fQ.NgYp6HbPjzv1ihFnLJpxjovBkt-w6CLfibS92hJFAsA"
+  },
+  "account": {
+    "id": 2,
+    "login": "luis",
+    "firstName": "Luis",
+    "lastName": "Cameroon",
+    "email": "luis@localhost",
+    "imageUrl": "https://randomuser.me/api/portraits/men/3.jpg",
+    "activated": true,
+    "langKey": "en",
+    "createdBy": "system",
+    "createdDate": "2018-07-16T07:32:20.421Z",
+    "lastModifiedBy": "system",
+    "lastModifiedDate": null,
+    "authorities": [
+      "ROLE_USER",
+      "ROLE_ADMIN"
+    ]
+  }
+}

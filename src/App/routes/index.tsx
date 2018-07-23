@@ -1,22 +1,19 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-// import Loadable from 'react-loadable';
+import Loadable from 'react-loadable';
 
-// import Login from 'app/features/login/login';
-// import Register from 'app/features/account/register/register';
-// import Activate from 'app/features/account/activate/activate';
-// import PasswordResetInit from 'app/features/account/password-reset/init/password-reset-init';
-// import PasswordResetFinish from 'app/features/account/password-reset/finish/password-reset-finish';
-// import Logout from 'app/features/login/logout';
+import Login from '../features/Login/components/Login';
+import Register from '../features/Account/components/Register';
+import Logout from '../features/Login/components/Logout';
 import Dashboard from '../features/Home/components/Dashboard';
-// import PrivateRoute from '../shared/helpers/private-route.helper';
+import PrivateRoute from '../shared/helpers/private-route.helper';
 import ErrorBoundaryRoute from '../shared/helpers/error-boundary-route.helper';
-// import { AUTHORITIES } from '../shared/constants';
+import appConstants from '../shared/constants';
 
-// const Account = Loadable({
-//   loader: () => import('app/features/account'),
-//   loading: () => <div>loading ...</div>
-// });
+const Account = Loadable({
+  loader: () => import('../features/Account/routes'),
+  loading: () => <div>Loading ...</div>
+});
 
 // const Admin = Loadable({
 //   loader: () => import('app/features/admin'),
@@ -25,23 +22,23 @@ import ErrorBoundaryRoute from '../shared/helpers/error-boundary-route.helper';
 
 const Routes = () => (
   <div className="view-routes">
-    {/* <ErrorBoundaryRoute path="/login" component={Login} /> */}
+    <ErrorBoundaryRoute path="/login" component={Login} />
     <Switch>
-      {/* <ErrorBoundaryRoute path="/logout" component={Logout} />
+      <ErrorBoundaryRoute path="/logout" component={Logout} />
       <ErrorBoundaryRoute path="/register" component={Register} />
-      <ErrorBoundaryRoute path="/activate/:key?" component={Activate} />
-      <ErrorBoundaryRoute path="/reset/request" component={PasswordResetInit} />
-      <ErrorBoundaryRoute path="/reset/finish/:key?" component={PasswordResetFinish} />
-      <PrivateRoute
+      {/* <PrivateRoute
         path="/admin"
         component={Admin}
-        hasAnyAuthorities={[AUTHORITIES.ADMIN]}
-      />
+        hasAnyAuthorities={[appConstants.authorities.ADMIN]}
+      /> */}
       <PrivateRoute
         path="/account"
         component={Account}
-        hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]}
-      /> */}
+        hasAnyAuthorities={[
+          appConstants.authorities.ADMIN,
+          appConstants.authorities.USER
+        ]}
+      />
       <ErrorBoundaryRoute path="/" component={Dashboard} />
     </Switch>
   </div>

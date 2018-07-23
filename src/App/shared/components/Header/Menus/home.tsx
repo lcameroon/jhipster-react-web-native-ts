@@ -14,9 +14,9 @@ import appConstants from '../../../constants';
 
 export const NavDropdown = props => (
   <UncontrolledDropdown nav inNavbar id={props.id}>
-    <DropdownToggle nav caret className="d-flex align-items-center">
+    <DropdownToggle nav caret className="d-flex align-items-center ml-2">
       <FontAwesomeIcon icon={props.icon} />
-      <span>{props.name}</span>
+      <span className="ml-2">{props.name}</span>
     </DropdownToggle>
     <DropdownMenu right style={props.style}>
       {props.children}

@@ -8,12 +8,13 @@ import { NavDropdown } from './home';
 const adminMenuItems = (
   <>
     <DropdownItem tag={Link} to="/admin/user-management">
-      <FontAwesomeIcon icon="user" /> User management
+      <FontAwesomeIcon icon="user" />
+      <span className="ml-2">User management</span>
     </DropdownItem>
   </>
 );
 
-export const AdminMenu = ({ showSwagger, showDatabase }) => (
+export const AdminMenu = () => (
   <NavDropdown
     icon="user-plus"
     name="Administration"

@@ -4,6 +4,9 @@ import { HashRouter as Router } from 'react-router-dom';
 
 import { IRootState } from './reducers';
 import { setLocale } from './shared/reducers/locale.reducer';
+import { getSession } from './shared/reducers/auth.reducer';
+import { hasAnyAuthority } from './shared/helpers/private-route.helper';
+import appConstants from './shared/constants';
 import Header from './shared/components/Header';
 import ErrorBoundary from './shared/helpers/error-boundary.helper';
 import AppRoutes from './routes';
@@ -11,7 +14,9 @@ import AppRoutes from './routes';
 export interface IAppProps extends StateProps, DispatchProps {}
 
 export class App extends React.Component<IAppProps> {
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.getSession();
+  }
 
   render() {
     const paddingTop = '80px';
@@ -20,6 +25,8 @@ export class App extends React.Component<IAppProps> {
         <div className="app-container" style={{ paddingTop }}>
           <ErrorBoundary>
             <Header
+              isAuthenticated={this.props.isAuthenticated}
+              isAdmin={this.props.isAdmin}
               currentLocale={this.props.currentLocale}
               onLocaleChange={this.props.setLocale}
             />
@@ -35,11 +42,15 @@ export class App extends React.Component<IAppProps> {
   }
 }
 
-const mapStateToProps = ({ locale }: IRootState) => ({
-  currentLocale: locale.currentLocale
+const mapStateToProps = ({ locale, authentication }: IRootState) => ({
+  currentLocale: locale.currentLocale,
+  isAuthenticated: authentication.isAuthenticated,
+  isAdmin: hasAnyAuthority(authentication.account.authorities, [
+    appConstants.authorities.ADMIN
+  ])
 });
 
-const mapDispatchToProps = { setLocale };
+const mapDispatchToProps = { setLocale, getSession };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

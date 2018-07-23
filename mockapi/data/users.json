@@ -1,0 +1,83 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "system",
+      "password": "system",
+      "login": "system",
+      "firstName": "System",
+      "lastName": "System",
+      "email": "system@localhost",
+      "imageUrl": "",
+      "activated": true,
+      "langKey": "en",
+      "createdBy": "system",
+      "createdDate": "2018-07-16T07:32:20.421Z",
+      "lastModifiedBy": "system",
+      "lastModifiedDate": null,
+      "authorities": [
+        "ROLE_USER",
+        "ROLE_ADMIN"
+      ]
+    },
+    {
+      "id": 2,
+      "username": "luis",
+      "password": "luis",
+      "login": "luis",
+      "firstName": "Luis",
+      "lastName": "Cameroon",
+      "email": "luis@localhost",
+      "imageUrl": "https://randomuser.me/api/portraits/men/3.jpg",
+      "activated": true,
+      "langKey": "en",
+      "createdBy": "system",
+      "createdDate": "2018-07-16T07:32:20.421Z",
+      "lastModifiedBy": "system",
+      "lastModifiedDate": null,
+      "authorities": [
+        "ROLE_USER",
+        "ROLE_ADMIN"
+      ]
+    },
+    {
+      "id": 3,
+      "username": "admin",
+      "password": "admin",
+      "login": "admin",
+      "firstName": "Administrator",
+      "lastName": "Administrator",
+      "email": "admin@localhost",
+      "imageUrl": "",
+      "activated": true,
+      "langKey": "en",
+      "createdBy": "system",
+      "createdDate": "2018-07-16T07:32:20.421Z",
+      "lastModifiedBy": "system",
+      "lastModifiedDate": null,
+      "authorities": [
+        "ROLE_USER",
+        "ROLE_ADMIN"
+      ]
+    },
+    {
+      "id": 4,
+      "username": "user",
+      "password": "user",
+      "login": "user",
+      "firstName": "User",
+      "lastName": "User",
+      "email": "user@localhost",
+      "imageUrl": "",
+      "activated": true,
+      "langKey": "en",
+      "createdBy": "system",
+      "createdDate": "2018-07-16T07:32:20.421Z",
+      "lastModifiedBy": "system",
+      "lastModifiedDate": null,
+      "authorities": [
+        "ROLE_USER"
+      ]
+    }
+  ]
+}

@@ -1,40 +1,29 @@
-import React from 'react';
-import { StackNavigator, DrawerNavigator } from 'react-navigation';
-import { Root } from 'native-base';
-import { Dimensions } from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import Header from './shared/components/Header';
 
-const deviceWidth = Dimensions.get('window').width;
-
-import Login from './features/Login/containers/LoginContainer';
-import Home from './features/Home/containers/HomeContainer';
-import BlankPage from './shared/components/BlankPage';
-import Sidebar from './shared/components/Sidebar';
-
-const Drawer = DrawerNavigator(
-  {
-    Home: { screen: Home }
-  },
-  {
-    drawerWidth: deviceWidth - 50,
-    drawerPosition: 'left',
-    contentComponent: (props: any) => <Sidebar {...props} />
+export default class App extends Component {
+  render() {
+    return (
+      <View style={styles.app}>
+        <Header />
+        <Text style={styles.appIntro}>
+          To get started, edit src/App.js and save to reload.
+        </Text>
+      </View>
+    );
   }
-);
+}
 
-const App = StackNavigator(
-  {
-    Login: { screen: Login },
-    BlankPage: { screen: BlankPage },
-    Drawer: { screen: Drawer }
+const styles = StyleSheet.create({
+  app: {
+    flex: 1
   },
-  {
-    initialRouteName: 'Login',
-    headerMode: 'none'
+  appIntro: {
+    flex: 2,
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 15,
+    marginBottom: 15
   }
-);
-
-export default () => (
-  <Root>
-    <App />
-  </Root>
-);
+});
