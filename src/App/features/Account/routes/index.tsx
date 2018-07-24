@@ -2,8 +2,8 @@ import React from 'react';
 
 import ErrorBoundaryRoute from '../../../shared/helpers/error-boundary-route.helper';
 
-import Settings from '../components/Settings';
-import Password from '../components/Password';
+import Settings from '../containers/SettingsContainer';
+import Password from '../containers/PasswordContainer';
 
 const Routes = ({ match }) => (
   <div>

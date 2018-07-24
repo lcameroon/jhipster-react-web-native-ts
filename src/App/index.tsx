@@ -3,13 +3,18 @@ import { connect } from 'react-redux';
 import { HashRouter as Router } from 'react-router-dom';
 
 import { IRootState } from './reducers';
-import { setLocale } from './shared/reducers/locale.reducer';
-import { getSession } from './shared/reducers/auth.reducer';
+import { setLocale } from './shared/actions/locale.action';
+import { getSession } from './shared/actions/auth.action';
 import { hasAnyAuthority } from './shared/helpers/private-route.helper';
 import appConstants from './shared/constants';
 import Header from './shared/components/Header';
 import ErrorBoundary from './shared/helpers/error-boundary.helper';
 import AppRoutes from './routes';
+import { selectCurrentLocale } from './shared/reducers/locale.reducer';
+import {
+  selectIsAuthenticated,
+  selectUserAuthorities
+} from './shared/reducers/auth.reducer';
 
 export interface IAppProps extends StateProps, DispatchProps {}
 
@@ -42,12 +47,10 @@ export class App extends React.Component<IAppProps> {
   }
 }
 
-const mapStateToProps = ({ locale, authentication }: IRootState) => ({
-  currentLocale: locale.currentLocale,
-  isAuthenticated: authentication.isAuthenticated,
-  isAdmin: hasAnyAuthority(authentication.account.authorities, [
-    appConstants.authorities.ADMIN
-  ])
+const mapStateToProps = (state: IRootState) => ({
+  currentLocale: selectCurrentLocale(state),
+  isAuthenticated: selectIsAuthenticated(state),
+  isAdmin: hasAnyAuthority(selectUserAuthorities(state), [appConstants.authorities.ADMIN])
 });
 
 const mapDispatchToProps = { setLocale, getSession };

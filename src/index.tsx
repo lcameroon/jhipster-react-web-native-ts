@@ -11,7 +11,7 @@ import initStore from './App/store';
 import DevTools from './App/shared/helpers/devtools.helper';
 import ErrorBoundary from './App/shared/helpers/error-boundary.helper';
 import setupAxiosInterceptors from './App/shared/interceptors/axios.interceptor';
-import { clearAuthentication } from './App/shared/reducers/auth.reducer';
+import { clearAuthentication } from './App/shared/actions/auth.action';
 import { registerLocale } from './App/shared/utils/translation.util';
 import { loadIcons } from './App/shared/utils/icon-loader.util';
 import registerServiceWorker from './register-service-worker';

@@ -1,8 +1,9 @@
-import { TranslatorContext, Storage } from 'react-jhipster';
+import { createSelector } from 'reselect';
+import { TranslatorContext } from 'react-jhipster';
 
-export const ACTION_TYPES = {
-  SET_LOCALE: 'locale/SET_LOCALE'
-};
+import { ACTION_TYPES } from '../actions/locale.action';
+import { IRootState } from '../../reducers';
+import Storage from '../utils/storage';
 
 const initialState = {
   currentLocale: undefined
@@ -15,7 +16,7 @@ export default (state: LocaleState = initialState, action): LocaleState => {
     case ACTION_TYPES.SET_LOCALE:
       const currentLocale = action.locale;
       if (state.currentLocale !== currentLocale) {
-        Storage.session.set('locale', currentLocale);
+        Storage.set('locale', currentLocale);
         TranslatorContext.setLocale(currentLocale);
       }
       return {
@@ -26,13 +27,10 @@ export default (state: LocaleState = initialState, action): LocaleState => {
   }
 };
 
-export const setLocale = locale => async dispatch => {
-  if (Object.keys(TranslatorContext.context.translations).indexOf(locale) === -1) {
-    const i18n = require(`../../../i18n/${locale}.json`);
-    TranslatorContext.registerTranslations(locale, i18n);
-  }
-  dispatch({
-    type: ACTION_TYPES.SET_LOCALE,
-    locale
-  });
-};
+// Selectors
+const getLocaleState = (state: IRootState) => state.locale;
+
+export const selectCurrentLocale = createSelector(
+  getLocaleState,
+  (state: LocaleState) => state.currentLocale
+);

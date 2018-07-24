@@ -64,11 +64,11 @@ export const hasAnyAuthority = (authorities: string[], hasAnyAuthorities: string
 };
 
 const mapStateToProps = (
-  { authentication: { isAuthenticated, account } }: IRootState,
+  { authentication: { isAuthenticated, user } }: IRootState,
   { hasAnyAuthorities = [] }: IOwnProps
 ) => ({
   isAuthenticated,
-  isAuthorized: hasAnyAuthority(account.authorities, hasAnyAuthorities)
+  isAuthorized: hasAnyAuthority(user.authorities, hasAnyAuthorities)
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;

@@ -1,6 +1,7 @@
-import { TranslatorContext, Storage } from 'react-jhipster';
+import { TranslatorContext } from 'react-jhipster';
+import Storage from '../utils/storage';
 
-import { setLocale } from '../reducers/locale.reducer';
+import { setLocale } from '../actions/locale.action';
 
 TranslatorContext.setDefaultLocale('en');
 TranslatorContext.setRenderInnerTextForMissingKeys(false);
@@ -12,5 +13,7 @@ export const languages: any = {
 export const locales = Object.keys(languages).sort();
 
 export const registerLocale = store => {
-  store.dispatch(setLocale(Storage.session.get('locale', 'en')));
+  Storage.get('locale').then(locale => {
+    store.dispatch(setLocale(locale || 'en'));
+  });
 };

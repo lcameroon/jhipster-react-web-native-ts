@@ -1,11 +1,8 @@
-import axios from 'axios';
+import { createSelector } from 'reselect';
+import { ACTION_TYPES } from '../actions/password.action';
 
 import { REQUEST, SUCCESS, FAILURE } from '../../../shared/utils/action-type.util';
-
-export const ACTION_TYPES = {
-  UPDATE_PASSWORD: 'account/UPDATE_PASSWORD',
-  RESET: 'account/RESET'
-};
+import { IRootState } from '../../../reducers';
 
 const initialState = {
   loading: false,
@@ -49,21 +46,25 @@ export default (state: PasswordState = initialState, action): PasswordState => {
   }
 };
 
-// Actions
-const apiUrl = 'api/account';
+// Selectors
+const getPasswordState = (state: IRootState) => state.account.password;
 
-export const savePassword = (currentPassword, newPassword) => ({
-  type: ACTION_TYPES.UPDATE_PASSWORD,
-  payload: axios.post(`${apiUrl}/change-password`, {
-    currentPassword,
-    newPassword
-  }),
-  meta: {
-    successMessage: `<strong>Password changed!</strong>`,
-    errorMessage: `<strong>An error has occurred!</strong> The password could not be changed.`
-  }
-});
+export const selectPasswordLoading = createSelector(
+  getPasswordState,
+  (state: PasswordState) => state.loading
+);
 
-export const reset = () => ({
-  type: ACTION_TYPES.RESET
-});
+export const selectPasswordErrorMessage = createSelector(
+  getPasswordState,
+  (state: PasswordState) => state.errorMessage
+);
+
+export const selectPasswordUpdateSuccess = createSelector(
+  getPasswordState,
+  (state: PasswordState) => state.updateSuccess
+);
+
+export const selectPasswordUpdateFailure = createSelector(
+  getPasswordState,
+  (state: PasswordState) => state.updateFailure
+);

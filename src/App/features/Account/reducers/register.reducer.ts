@@ -1,11 +1,8 @@
-import axios from 'axios';
+import { createSelector } from 'reselect';
+import { ACTION_TYPES } from '../actions/register.action';
 
 import { REQUEST, SUCCESS, FAILURE } from '../../../shared/utils/action-type.util';
-
-export const ACTION_TYPES = {
-  CREATE_ACCOUNT: 'register/CREATE_ACCOUNT',
-  RESET: 'register/RESET'
-};
+import { IRootState } from '../../../reducers';
 
 const initialState = {
   loading: false,
@@ -44,15 +41,25 @@ export default (state: RegisterState = initialState, action): RegisterState => {
   }
 };
 
-// Actions
-export const handleRegister = (login, email, password, langKey = 'en') => ({
-  type: ACTION_TYPES.CREATE_ACCOUNT,
-  payload: axios.post('api/register', { login, email, password, langKey }),
-  meta: {
-    successMessage: `<strong>Registration saved!</strong> Please check your email for confirmation.`
-  }
-});
+// Selectors
+const getRegisterState = (state: IRootState) => state.account.register;
 
-export const reset = () => ({
-  type: ACTION_TYPES.RESET
-});
+export const selectRegisterLoading = createSelector(
+  getRegisterState,
+  (state: RegisterState) => state.loading
+);
+
+export const selectRegisterErrorMessage = createSelector(
+  getRegisterState,
+  (state: RegisterState) => state.errorMessage
+);
+
+export const selectRegisterUpdateSuccess = createSelector(
+  getRegisterState,
+  (state: RegisterState) => state.registrationSuccess
+);
+
+export const selectRegisterUpdateFailure = createSelector(
+  getRegisterState,
+  (state: RegisterState) => state.registrationFailure
+);
