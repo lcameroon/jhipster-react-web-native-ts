@@ -1,24 +1,16 @@
-import axios from 'axios';
-import { Storage } from 'react-jhipster';
+import { createSelector } from 'reselect';
+import { ACTION_TYPES } from '../actions/auth.action';
 
-import appConstants from '../constants';
 import { REQUEST, SUCCESS, FAILURE } from '../utils/action-type.util';
-
-export const ACTION_TYPES = {
-  LOGIN: 'authentication/LOGIN',
-  GET_SESSION: 'authentication/GET_SESSION',
-  LOGOUT: 'authentication/LOGOUT',
-  CLEAR_AUTH: 'authentication/CLEAR_AUTH',
-  ERROR_MESSAGE: 'authentication/ERROR_MESSAGE'
-};
+import { IRootState } from '../../reducers';
 
 const initialState = {
-  loading: false,
   isAuthenticated: false,
+  user: {} as any,
+  loading: false,
   loginSuccess: false,
   loginError: false, // Errors returned from server side
   showModalLogin: false,
-  account: {} as any,
   errorMessage: null, // Errors returned from server side
   redirectMessage: null
 };
@@ -26,7 +18,6 @@ const initialState = {
 export type AuthenticationState = Readonly<typeof initialState>;
 
 // Reducer
-
 export default (
   state: AuthenticationState = initialState,
   action
@@ -73,7 +64,7 @@ export default (
         ...state,
         isAuthenticated,
         loading: false,
-        account: action.payload.data
+        user: action.payload.data
       };
     }
     case ACTION_TYPES.ERROR_MESSAGE:
@@ -94,60 +85,50 @@ export default (
   }
 };
 
-export const displayAuthError = message => ({
-  type: ACTION_TYPES.ERROR_MESSAGE,
-  message
-});
+// Selectors
+const getAuthenticationState = (state: IRootState) => state.authentication;
 
-export const getSession = () => dispatch =>
-  dispatch({
-    type: ACTION_TYPES.GET_SESSION,
-    payload: axios.get('api/account')
-  });
+export const selectIsAuthenticated = createSelector(
+  getAuthenticationState,
+  (state: AuthenticationState) => state.isAuthenticated
+);
 
-export const login = (username, password, rememberMe = false) => async (
-  dispatch,
-  getState
-) => {
-  const result = await dispatch({
-    type: ACTION_TYPES.LOGIN,
-    payload: axios.post('api/authenticate', { username, password, rememberMe })
-  });
-  // Alternative: get bearerToken from the header
-  // const bearerToken = result.value.headers.authorization;
-  // const jwt = bearerToken.slice(7, bearerToken.length);
-  const bearerToken = result.value.data && result.value.data.id_token;
+export const selectAuthUser = createSelector(
+  getAuthenticationState,
+  (state: AuthenticationState) => state.user
+);
 
-  if (bearerToken) {
-    if (rememberMe) {
-      Storage.local.set(appConstants.tokenKey, bearerToken);
-    } else {
-      Storage.session.set(appConstants.tokenKey, bearerToken);
-    }
-  }
-  dispatch(getSession());
-};
+export const selectUserAuthorities = createSelector(
+  selectAuthUser,
+  state => state.authorities
+);
 
-export const clearAuthToken = () => {
-  if (Storage.local.get(appConstants.tokenKey)) {
-    Storage.local.remove(appConstants.tokenKey);
-  }
-  if (Storage.session.get(appConstants.tokenKey)) {
-    Storage.session.remove(appConstants.tokenKey);
-  }
-};
+export const selectAuthLoading = createSelector(
+  getAuthenticationState,
+  (state: AuthenticationState) => state.loading
+);
 
-export const logout = () => dispatch => {
-  clearAuthToken();
-  dispatch({
-    type: ACTION_TYPES.LOGOUT
-  });
-};
+export const selectAuthLoginSuccess = createSelector(
+  getAuthenticationState,
+  (state: AuthenticationState) => state.loginSuccess
+);
 
-export const clearAuthentication = messageKey => (dispatch, getState) => {
-  clearAuthToken();
-  dispatch(displayAuthError(messageKey));
-  dispatch({
-    type: ACTION_TYPES.CLEAR_AUTH
-  });
-};
+export const selectAuthLoginError = createSelector(
+  getAuthenticationState,
+  (state: AuthenticationState) => state.loginError
+);
+
+export const selectAuthShowModalLogin = createSelector(
+  getAuthenticationState,
+  (state: AuthenticationState) => state.showModalLogin
+);
+
+export const selectAuthErrorMessage = createSelector(
+  getAuthenticationState,
+  (state: AuthenticationState) => state.errorMessage
+);
+
+export const selectAuthRedirectMessage = createSelector(
+  getAuthenticationState,
+  (state: AuthenticationState) => state.redirectMessage
+);

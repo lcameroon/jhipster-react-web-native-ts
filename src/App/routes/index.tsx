@@ -2,9 +2,9 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
-import Login from '../features/Login/components/Login';
-import Register from '../features/Account/components/Register';
-import Logout from '../features/Login/components/Logout';
+import Login from '../features/Login/containers/LoginContainer';
+import Register from '../features/Account/containers/RegisterContainer';
+import Logout from '../features/Login/containers/LogoutContainer';
 import Dashboard from '../features/Home/components/Dashboard';
 import PrivateRoute from '../shared/helpers/private-route.helper';
 import ErrorBoundaryRoute from '../shared/helpers/error-boundary-route.helper';

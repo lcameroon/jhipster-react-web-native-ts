@@ -1,53 +1,26 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Row, Col, Button } from 'reactstrap';
 
-import { IRootState } from '../../../../reducers';
-import { getSession } from '../../../../shared/reducers/auth.reducer';
-import { savePassword, reset } from '../../reducers/password.reducer';
 import PasswordStrengthBar from '../PasswordStrengthBar';
 
-export interface IUserPasswordProps extends StateProps, DispatchProps {}
-
-export interface IUserPasswordState {
+export interface IProps {
+  user: any;
   password: string;
+  handleValidSubmit: Function;
+  updatePassword: Function;
 }
 
-export class PasswordPage extends React.Component<
-  IUserPasswordProps,
-  IUserPasswordState
-> {
-  state: IUserPasswordState = {
-    password: ''
-  };
-
-  componentDidMount() {
-    this.props.reset();
-    this.props.getSession();
-  }
-
-  componentWillUnmount() {
-    this.props.reset();
-  }
-
-  handleValidSubmit = (event, values) => {
-    this.props.savePassword(values.currentPassword, values.newPassword);
-  };
-
-  updatePassword = event => {
-    this.setState({ password: event.target.value });
-  };
-
+export class PasswordForm extends React.Component<any, any> {
   render() {
-    const { account } = this.props;
+    const { user, handleValidSubmit, updatePassword, password } = this.props;
 
     return (
       <div>
         <Row className="justify-content-center">
           <Col md="8">
-            <h2 id="password-title">Password for {account.login}</h2>
-            <AvForm id="password-form" onValidSubmit={this.handleValidSubmit}>
+            <h2 id="password-title">Password for {user.login}</h2>
+            <AvForm id="password-form" onValidSubmit={handleValidSubmit}>
               <AvField
                 name="currentPassword"
                 label="Current password"
@@ -79,9 +52,9 @@ export class PasswordPage extends React.Component<
                     errorMessage: 'Your password cannot be longer than 50 characters.'
                   }
                 }}
-                onChange={this.updatePassword}
+                onChange={updatePassword}
               />
-              <PasswordStrengthBar password={this.state.password} />
+              <PasswordStrengthBar password={password} />
               <AvField
                 name="confirmPassword"
                 label="New password confirmation"
@@ -118,18 +91,3 @@ export class PasswordPage extends React.Component<
     );
   }
 }
-
-const mapStateToProps = ({ authentication }: IRootState) => ({
-  account: authentication.account,
-  isAuthenticated: authentication.isAuthenticated
-});
-
-const mapDispatchToProps = { getSession, savePassword, reset };
-
-type StateProps = ReturnType<typeof mapStateToProps>;
-type DispatchProps = typeof mapDispatchToProps;
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PasswordPage);

@@ -28,6 +28,7 @@
     "no-var-keyword": true,
     "no-implicit-dependencies": [false, "dev"],
     "object-literal-sort-keys": false,
+    "interface-over-type-literal": false,
     "one-line": [
       true,
       "check-open-brace",

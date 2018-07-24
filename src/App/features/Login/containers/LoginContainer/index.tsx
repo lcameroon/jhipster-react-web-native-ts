@@ -3,8 +3,13 @@ import { connect } from 'react-redux';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
 
 import { IRootState } from '../../../../reducers';
-import { login } from '../../../../shared/reducers/auth.reducer';
-import LoginModal from '../LoginModal';
+import { login } from '../../../../shared/actions/auth.action';
+import {
+  selectIsAuthenticated,
+  selectAuthLoginError,
+  selectAuthShowModalLogin
+} from '../../../../shared/reducers/auth.reducer';
+import LoginModal from '../../components/LoginModal';
 
 export interface ILoginProps
   extends StateProps,
@@ -15,7 +20,7 @@ export interface ILoginState {
   showModal: boolean;
 }
 
-export class Login extends React.Component<ILoginProps, ILoginState> {
+export class LoginContainer extends React.Component<ILoginProps, ILoginState> {
   state: ILoginState = {
     showModal: this.props.showModal
   };
@@ -54,10 +59,10 @@ export class Login extends React.Component<ILoginProps, ILoginState> {
   }
 }
 
-const mapStateToProps = ({ authentication }: IRootState) => ({
-  isAuthenticated: authentication.isAuthenticated,
-  loginError: authentication.loginError,
-  showModal: authentication.showModalLogin
+const mapStateToProps = (state: IRootState) => ({
+  isAuthenticated: selectIsAuthenticated(state),
+  loginError: selectAuthLoginError(state),
+  showModal: selectAuthShowModalLogin(state)
 });
 
 const mapDispatchToProps = { login };
@@ -68,4 +73,4 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(LoginContainer);

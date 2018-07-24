@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { IRootState } from '../../../../reducers';
-import { logout } from '../../../../shared/reducers/auth.reducer';
+import { logout } from '../../../../shared/actions/auth.action';
 
 export interface ILogoutProps extends StateProps, DispatchProps {}
 

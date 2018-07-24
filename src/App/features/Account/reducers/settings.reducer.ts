@@ -1,12 +1,8 @@
-import axios from 'axios';
+import { createSelector } from 'reselect';
+import { ACTION_TYPES } from '../actions/settings.action';
 
 import { REQUEST, SUCCESS, FAILURE } from '../../../shared/utils/action-type.util';
-import { getSession } from '../../../shared/reducers/auth.reducer';
-
-export const ACTION_TYPES = {
-  UPDATE_ACCOUNT: 'account/UPDATE_ACCOUNT',
-  RESET: 'account/RESET'
-};
+import { IRootState } from '../../../reducers';
 
 const initialState = {
   loading: false,
@@ -50,20 +46,25 @@ export default (state: SettingsState = initialState, action): SettingsState => {
   }
 };
 
-// Actions
-const apiUrl = 'api/account';
+// Selectors
+const getSettingsState = (state: IRootState) => state.account.settings;
 
-export const saveAccountSettings = account => async dispatch => {
-  await dispatch({
-    type: ACTION_TYPES.UPDATE_ACCOUNT,
-    payload: axios.post(apiUrl, account),
-    meta: {
-      successMessage: `<strong>Settings saved!</strong>`
-    }
-  });
-  dispatch(getSession());
-};
+export const selectSettingsLoading = createSelector(
+  getSettingsState,
+  (state: SettingsState) => state.loading
+);
 
-export const reset = () => ({
-  type: ACTION_TYPES.RESET
-});
+export const selectSettingsErrorMessage = createSelector(
+  getSettingsState,
+  (state: SettingsState) => state.errorMessage
+);
+
+export const selectSettingsUpdateSuccess = createSelector(
+  getSettingsState,
+  (state: SettingsState) => state.updateSuccess
+);
+
+export const selectSettingsUpdateFailure = createSelector(
+  getSettingsState,
+  (state: SettingsState) => state.updateFailure
+);

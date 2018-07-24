@@ -1,42 +1,20 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Row, Col, Alert, Button } from 'reactstrap';
 
-import { IRootState } from '../../../../reducers';
-import { handleRegister, reset } from '../../reducers/register.reducer';
 import PasswordStrengthBar from '../PasswordStrengthBar';
 
-export interface IRegisterProps extends StateProps, DispatchProps {}
-
-export interface IRegisterState {
+export interface IProps {
   password: string;
+  currentLocale: string;
+  handleValidSubmit: Function;
+  updatePassword: Function;
 }
 
-export class RegisterPage extends React.Component<IRegisterProps, IRegisterState> {
-  state: IRegisterState = {
-    password: ''
-  };
-
-  componentWillUnmount() {
-    this.props.reset();
-  }
-
-  handleValidSubmit = (event, values) => {
-    this.props.handleRegister(
-      values.username,
-      values.email,
-      values.firstPassword,
-      this.props.currentLocale
-    );
-    event.preventDefault();
-  };
-
-  updatePassword = event => {
-    this.setState({ password: event.target.value });
-  };
-
+export class RegisterForm extends React.Component<IProps> {
   render() {
+    const { handleValidSubmit, updatePassword, password } = this.props;
+
     return (
       <div>
         <Row className="justify-content-center">
@@ -46,7 +24,7 @@ export class RegisterPage extends React.Component<IRegisterProps, IRegisterState
         </Row>
         <Row className="justify-content-center">
           <Col md="8">
-            <AvForm id="register-form" onValidSubmit={this.handleValidSubmit}>
+            <AvForm id="register-form" onValidSubmit={handleValidSubmit}>
               <AvField
                 name="username"
                 label="Username"
@@ -95,7 +73,7 @@ export class RegisterPage extends React.Component<IRegisterProps, IRegisterState
                 label="New password"
                 placeholder="New password"
                 type="password"
-                onChange={this.updatePassword}
+                onChange={updatePassword}
                 validate={{
                   required: {
                     value: true,
@@ -111,7 +89,7 @@ export class RegisterPage extends React.Component<IRegisterProps, IRegisterState
                   }
                 }}
               />
-              <PasswordStrengthBar password={this.state.password} />
+              <PasswordStrengthBar password={password} />
               <AvField
                 name="secondPassword"
                 label="New password confirmation"
@@ -158,16 +136,3 @@ export class RegisterPage extends React.Component<IRegisterProps, IRegisterState
     );
   }
 }
-
-const mapStateToProps = ({ locale }: IRootState) => ({
-  currentLocale: locale.currentLocale
-});
-
-const mapDispatchToProps = { handleRegister, reset };
-type StateProps = ReturnType<typeof mapStateToProps>;
-type DispatchProps = typeof mapDispatchToProps;
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RegisterPage);

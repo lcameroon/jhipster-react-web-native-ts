@@ -1,22 +1,20 @@
 import axios from 'axios';
-import { Storage } from 'react-jhipster';
+import Storage from '../utils/storage';
 
 import appConstants from '../constants';
 
 const TIMEOUT = 1000000; // 10000
 const setupAxiosInterceptors = onUnauthenticated => {
   const onRequestSuccess = config => {
-    const token =
-      Storage.local.get(appConstants.tokenKey) ||
-      Storage.session.get(appConstants.tokenKey);
+    return Storage.get(appConstants.tokenKey).then(token => {
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      config.timeout = TIMEOUT;
+      config.url = `${appConstants.serverApiUrl}${config.url}`;
 
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    config.timeout = TIMEOUT;
-    config.url = `${appConstants.serverApiUrl}${config.url}`;
-
-    return config;
+      return config;
+    });
   };
 
   const onResponseSuccess = response => response;
