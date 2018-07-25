@@ -125,7 +125,7 @@ export class RegisterForm extends React.Component<IProps> {
               <span>If you want to </span>
               <a className="alert-link"> sign in</a>
               <span>
-                , you can try the default accounts:
+                , you can try the default profiles:
                 <br />- Administrator (login="admin" and password="admin")
                 <br />- User (login="user" and password="user").
               </span>

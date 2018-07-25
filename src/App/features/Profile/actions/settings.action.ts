@@ -3,16 +3,16 @@ import axios from 'axios';
 import { getSession } from '../../../shared/actions/auth.action';
 
 export const ACTION_TYPES = {
-  UPDATE_ACCOUNT: 'account/UPDATE_ACCOUNT',
-  RESET: 'account/RESET'
+  UPDATE_ACCOUNT: 'profile/UPDATE_ACCOUNT',
+  RESET: 'profile/RESET'
 };
 
-const apiUrl = 'api/account';
+const apiUrl = 'api/profile';
 
-export const saveAccountSettings = account => async dispatch => {
+export const saveProfileSettings = profile => async dispatch => {
   await dispatch({
     type: ACTION_TYPES.UPDATE_ACCOUNT,
-    payload: axios.post(apiUrl, account),
+    payload: axios.post(apiUrl, profile),
     meta: {
       successMessage: `<strong>Settings saved!</strong>`
     }
