@@ -11,6 +11,7 @@
     "allowJs": false,
     "noEmitHelpers": true,
     "importHelpers": true,
+    "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": false,
     "noImplicitReturns": true,

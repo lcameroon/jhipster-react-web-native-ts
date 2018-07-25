@@ -1,15 +1,40 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { Button, View, Text, StyleSheet } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import { login } from './shared/actions/auth.action';
+
 import Header from './shared/components/Header';
 
-export default class App extends Component {
+import {
+  selectIsAuthenticated,
+  selectAuthLoginError
+} from './shared/reducers/auth.reducer';
+
+const mapStateToProps = (state: any) => ({
+  isAuthenticated: selectIsAuthenticated(state),
+  loginError: selectAuthLoginError(state)
+});
+
+const mapDispatchToProps = { login };
+
+@connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+class App extends Component<any, any> {
   render() {
+    const { isAuthenticated, navigation } = this.props;
+
+    if (isAuthenticated) {
+      return navigation.navigate('Dashboard');
+    }
+
     return (
       <View style={styles.app}>
         <Header />
-        <Text style={styles.appIntro}>
-          To get started, edit src/App.js and save to reload.
-        </Text>
+        <Button title="Login" onPress={() => this.props.login('admin', 'admin', false)} />
+        <Text style={styles.appIntro}>Hard coded username and password (admin)</Text>
       </View>
     );
   }
@@ -27,3 +52,14 @@ const styles = StyleSheet.create({
     marginBottom: 15
   }
 });
+
+export default StackNavigator(
+  {
+    App: {
+      screen: App
+    }
+  },
+  {
+    headerMode: 'none'
+  }
+);
