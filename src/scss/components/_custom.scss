@@ -1,0 +1,13 @@
+// custom styles goes here
+.col-form-label {
+    font-weight: bold;
+}
+
+@include media-breakpoint-up(md) {
+    .modal-dialog {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%) !important;
+    }
+}

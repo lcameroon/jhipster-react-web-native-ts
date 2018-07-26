@@ -1,8 +1,8 @@
 import { StackNavigator } from 'react-navigation';
 
 import Login from '../features/Login/containers/LoginContainer';
-import Register from '../features/Account/containers/RegisterContainer';
-import Dashboard from '../features/Home/components/Dashboard';
+import Register from '../features/Profile/containers/RegisterContainer';
+import Dashboard from '../features/Home/containers/DashboardContainer';
 
 interface IScreen {
   screen: any;

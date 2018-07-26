@@ -5,12 +5,12 @@ import { NavLink as Link } from 'react-router-dom';
 
 import { NavDropdown } from './home';
 
-const accountMenuItemsAuthenticated = (
+const profileMenuItemsAuthenticated = (
   <>
-    <DropdownItem tag={Link} to="/account/settings">
+    <DropdownItem tag={Link} to="/profile/settings">
       <FontAwesomeIcon icon="wrench" /> Settings
     </DropdownItem>
-    <DropdownItem tag={Link} to="/account/password">
+    <DropdownItem tag={Link} to="/profile/password">
       <FontAwesomeIcon icon="clock" /> Password
     </DropdownItem>
     <DropdownItem tag={Link} to="/logout">
@@ -19,7 +19,7 @@ const accountMenuItemsAuthenticated = (
   </>
 );
 
-const accountMenuItems = (
+const profileMenuItems = (
   <>
     <DropdownItem id="login-item" tag={Link} to="/login">
       <FontAwesomeIcon icon="sign-in-alt" /> Sign in
@@ -30,10 +30,10 @@ const accountMenuItems = (
   </>
 );
 
-export const AccountMenu = ({ isAuthenticated = false }) => (
-  <NavDropdown icon="user" name="Account" id="account-menu">
-    {isAuthenticated ? accountMenuItemsAuthenticated : accountMenuItems}
+export const ProfileMenu = ({ isAuthenticated = false }) => (
+  <NavDropdown icon="user" name="Profile" id="profile-menu">
+    {isAuthenticated ? profileMenuItemsAuthenticated : profileMenuItems}
   </NavDropdown>
 );
 
-export default AccountMenu;
+export default ProfileMenu;

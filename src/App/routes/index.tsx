@@ -3,22 +3,22 @@ import { Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
 import Login from '../features/Login/containers/LoginContainer';
-import Register from '../features/Account/containers/RegisterContainer';
+import Register from '../features/Profile/containers/RegisterContainer';
 import Logout from '../features/Login/containers/LogoutContainer';
-import Dashboard from '../features/Home/components/Dashboard';
+import Dashboard from '../features/Home/containers/DashboardContainer';
 import PrivateRoute from '../shared/helpers/private-route.helper';
 import ErrorBoundaryRoute from '../shared/helpers/error-boundary-route.helper';
 import appConstants from '../shared/constants';
 
-const Account = Loadable({
-  loader: () => import('../features/Account/routes'),
+const Profile = Loadable({
+  loader: () => import('../features/Profile/routes'),
   loading: () => <div>Loading ...</div>
 });
 
-// const Admin = Loadable({
-//   loader: () => import('app/features/admin'),
-//   loading: () => <div>loading ...</div>
-// });
+const Admin = Loadable({
+  loader: () => import('../features/Admin/routes'),
+  loading: () => <div>Loading ...</div>
+});
 
 const Routes = () => (
   <div className="view-routes">
@@ -26,14 +26,14 @@ const Routes = () => (
     <Switch>
       <ErrorBoundaryRoute path="/logout" component={Logout} />
       <ErrorBoundaryRoute path="/register" component={Register} />
-      {/* <PrivateRoute
+      <PrivateRoute
         path="/admin"
         component={Admin}
         hasAnyAuthorities={[appConstants.authorities.ADMIN]}
-      /> */}
+      />
       <PrivateRoute
-        path="/account"
-        component={Account}
+        path="/profile"
+        component={Profile}
         hasAnyAuthorities={[
           appConstants.authorities.ADMIN,
           appConstants.authorities.USER

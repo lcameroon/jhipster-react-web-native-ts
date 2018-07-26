@@ -1,5 +1,6 @@
 {
   "/api/*": "/$1",
   "/management/*": "/$1",
+  "/users/authorities": "/authorities",
   "/:resource/:id/view": "/:resource/:id"
 }

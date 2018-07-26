@@ -2,7 +2,7 @@ import React from 'react';
 import LoadingBar from 'react-redux-loading-bar';
 import { Navbar, Nav, NavbarToggler, Collapse } from 'reactstrap';
 
-import { Home, Brand, LocaleMenu, AdminMenu, ContatcsMenu, AccountMenu } from './Menus';
+import { Home, Brand, LocaleMenu, AdminMenu, ContatcsMenu, ProfileMenu } from './Menus';
 
 export interface IHeaderProps {
   isAuthenticated?: boolean;
@@ -50,7 +50,7 @@ export default class Header extends React.Component<IHeaderProps, IHeaderState> 
                   currentLocale={currentLocale}
                   onClick={this.handleLocaleChange}
                 />
-                <AccountMenu isAuthenticated={isAuthenticated} />
+                <ProfileMenu isAuthenticated={isAuthenticated} />
               </Nav>
             </Collapse>
           </div>

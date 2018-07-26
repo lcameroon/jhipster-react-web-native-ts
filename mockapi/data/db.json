@@ -10,6 +10,10 @@
   "authenticate": {
     "id_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTUzMTczMTA0NSwiZXhwIjoxNTMxNzM0NjQ1fQ.NgYp6HbPjzv1ihFnLJpxjovBkt-w6CLfibS92hJFAsA"
   },
+  "authorities": [
+    "ROLE_USER",
+    "ROLE_ADMIN"
+  ],
   "account": {
     "id": 2,
     "login": "luis",
