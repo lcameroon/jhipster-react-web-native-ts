@@ -25,7 +25,7 @@
     "clean:native": "watchman watch-del-all && rm -rf node_modules/ && npm cache verify && npm install",
     "eject:web": "react-scripts-ts eject",
     "eject:native": "react-native-scripts-ts eject",
-    "precommit": "npm run test"
+    "precommit": "jest"
   },
   "main": "./node_modules/react-native-scripts-ts/build/bin/crna-entry.js",
   "dependencies": {
@@ -64,6 +64,7 @@
     "@types/react-native": "^0.55.28",
     "@types/react-test-renderer": "^16.0.1",
     "husky": "^0.14.3",
+    "jest-cli": "^23.4.1",
     "jest-expo": "~27.0.0",
     "json-server": "^0.14.0",
     "node-sass-chokidar": "^1.3.3",
