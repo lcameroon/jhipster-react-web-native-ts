@@ -4,16 +4,16 @@ import register, { RegisterState } from './register.reducer';
 import password, { PasswordState } from './password.reducer';
 import settings, { SettingsState } from './settings.reducer';
 
-export interface IAccountState {
+export interface IProfileState {
   readonly password: PasswordState;
   readonly settings: SettingsState;
   readonly register: RegisterState;
 }
 
-const accountReducer = combineReducers<IAccountState>({
+const profileReducer = combineReducers<IProfileState>({
   password,
   settings,
   register
 });
 
-export default accountReducer;
+export default profileReducer;

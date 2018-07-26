@@ -7,6 +7,7 @@ const appConstants = {
   buildNumber: process.env.BUILD_NUMBER || '0',
   buildTimestamp: process.env.BUILD_TIMESTAMP || new Date().getTime(),
   serverApiUrl: process.env.SERVER_API_URL || 'http://localhost:8080/',
+  itemsPerPage: 20,
   tokenKey: 'jhi-token',
   messages: {
     DATA_ERROR_ALERT: 'Internal Error'

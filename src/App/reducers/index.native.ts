@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux';
 
 import authentication, { AuthenticationState } from '../shared/reducers/auth.reducer';
-import account, { IAccountState } from '../features/Account/reducers';
+import profile, { IProfileState } from '../features/Profile/reducers';
 
 export interface IRootState {
-  readonly account: IAccountState;
+  readonly profile: IProfileState;
   readonly authentication: AuthenticationState;
 }
 
 const rootReducer = combineReducers<IRootState>({
-  account,
+  profile,
   authentication
 });
 

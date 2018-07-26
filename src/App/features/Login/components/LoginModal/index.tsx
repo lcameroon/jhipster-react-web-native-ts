@@ -80,8 +80,8 @@ class LoginModal extends React.Component<ILoginModalProps> {
               <Link to="/reset/request">Did you forget your password?</Link>
             </Alert>
             <Alert color="warning">
-              <span>You don't have an account yet?</span>{' '}
-              <Link to="/register">Register a new account</Link>
+              <span>You don't have an profile yet?</span>{' '}
+              <Link to="/register">Register a new profile</Link>
             </Alert>
           </ModalBody>
           <ModalFooter>

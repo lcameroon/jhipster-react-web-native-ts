@@ -47,7 +47,7 @@ export default (state: PasswordState = initialState, action): PasswordState => {
 };
 
 // Selectors
-const getPasswordState = (state: IRootState) => state.account.password;
+const getPasswordState = (state: IRootState) => state.profile.password;
 
 export const selectPasswordLoading = createSelector(
   getPasswordState,

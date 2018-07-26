@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { IRootState } from '../../../reducers';
 import { getSession } from '../../../shared/actions/auth.action';
-import { saveAccountSettings, reset } from '../actions/settings.action';
+import { saveProfileSettings, reset } from '../actions/settings.action';
 import {
   selectAuthUser,
   selectIsAuthenticated
@@ -34,7 +34,7 @@ export class SettingsContainer extends React.Component<
       ...values
     };
 
-    this.props.saveAccountSettings(user);
+    this.props.saveProfileSettings(user);
     event.persist();
   };
 
@@ -56,7 +56,7 @@ const mapStateToProps = (state: IRootState) => ({
   isAuthenticated: selectIsAuthenticated(state)
 });
 
-const mapDispatchToProps = { getSession, saveAccountSettings, reset };
+const mapDispatchToProps = { getSession, saveProfileSettings, reset };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

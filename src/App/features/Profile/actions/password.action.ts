@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 export const ACTION_TYPES = {
-  UPDATE_PASSWORD: 'account/UPDATE_PASSWORD',
-  RESET: 'account/RESET'
+  UPDATE_PASSWORD: 'profile/UPDATE_PASSWORD',
+  RESET: 'profile/RESET'
 };
 
-const apiUrl = 'api/account';
+const apiUrl = 'api/profile';
 
 export const savePassword = (currentPassword, newPassword) => ({
   type: ACTION_TYPES.UPDATE_PASSWORD,

@@ -1,4 +1,4 @@
-export * from './account';
+export * from './profile';
 export * from './admin';
 export * from './locale';
 export * from './contacts';

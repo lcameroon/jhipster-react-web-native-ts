@@ -47,7 +47,7 @@ export default (state: SettingsState = initialState, action): SettingsState => {
 };
 
 // Selectors
-const getSettingsState = (state: IRootState) => state.account.settings;
+const getSettingsState = (state: IRootState) => state.profile.settings;
 
 export const selectSettingsLoading = createSelector(
   getSettingsState,

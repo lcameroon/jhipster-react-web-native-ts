@@ -24,7 +24,7 @@ export const NavDropdown = props => (
   </UncontrolledDropdown>
 );
 
-export const BrandIcon = props => (
+export const BrandLogo = props => (
   <div {...props} className="brand-icon">
     <img src={require('../../../../../assets/images/logo.png')} alt="Logo" />
   </div>
@@ -32,7 +32,7 @@ export const BrandIcon = props => (
 
 export const Brand = props => (
   <NavbarBrand tag={Link} to="/" className="brand-logo">
-    <BrandIcon />
+    <BrandLogo />
     <span className="brand-title">Super App</span>
     <span className="navbar-version">v{appConstants.version}</span>
   </NavbarBrand>

@@ -42,7 +42,7 @@ export default (state: RegisterState = initialState, action): RegisterState => {
 };
 
 // Selectors
-const getRegisterState = (state: IRootState) => state.account.register;
+const getRegisterState = (state: IRootState) => state.profile.register;
 
 export const selectRegisterLoading = createSelector(
   getRegisterState,

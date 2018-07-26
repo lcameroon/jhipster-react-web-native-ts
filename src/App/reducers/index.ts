@@ -4,22 +4,23 @@ import { loadingBarReducer as loadingBar } from 'react-redux-loading-bar';
 import locale, { LocaleState } from '../shared/reducers/locale.reducer';
 import authentication, { AuthenticationState } from '../shared/reducers/auth.reducer';
 
-import account, { IAccountState } from '../features/Account/reducers';
-// import admin, { IAdminState } from '../features/Admin/reducers';
+import profile, { IProfileState } from '../features/Profile/reducers';
+import admin, { IAdminState } from '../features/Admin/reducers';
 
 export interface IRootState {
-  readonly account: IAccountState;
+  readonly admin: IAdminState;
   readonly authentication: AuthenticationState;
   readonly locale: LocaleState;
   readonly loadingBar: any;
+  readonly profile: IProfileState;
 }
 
 const rootReducer = combineReducers<IRootState>({
-  account,
+  admin,
   authentication,
   locale,
-  loadingBar
-  // admin
+  loadingBar,
+  profile
 });
 
 export default rootReducer;

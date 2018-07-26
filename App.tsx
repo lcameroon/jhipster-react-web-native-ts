@@ -8,7 +8,7 @@ import setupAxiosInterceptors from './src/App/shared/interceptors/axios.intercep
 import initStore from './src/App/store';
 // Screens
 import App from './src/App';
-import Dashboard from './src/App/features/Home/components/Dashboard';
+import Dashboard from './src/App/features/Home/containers/DashboardContainer';
 
 const RootStack = StackNavigator(
   {
