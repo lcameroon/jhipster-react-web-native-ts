@@ -16,6 +16,10 @@ export class HomeContainer extends React.Component<
   IUserSettingsProps,
   IUserSettingsState
 > {
+  static navigationOptions = {
+    header: null
+  };
+
   render() {
     const { isAuthenticated } = this.props;
 

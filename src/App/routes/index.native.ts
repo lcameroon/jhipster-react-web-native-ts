@@ -1,21 +1,18 @@
-import { StackNavigator } from 'react-navigation';
-
-import Login from '../features/Login/containers/LoginContainer';
-import Register from '../features/Profile/containers/RegisterContainer';
+// Naviagtion
 import Home from '../features/Home/containers/HomeContainer';
+import Login from '../features/Login/containers/LoginContainer';
+import Profile from '../features/Profile/components/SettingsForm/index.native';
 
 interface IScreen {
   screen: any;
 }
 
-type Screens = { [any: string]: IScreen };
+type Screens = { [key: string]: IScreen };
 
 const screens: Screens = {
-  '/': { screen: Login },
-  '/register': { screen: Register },
-  '/home': { screen: Home }
+  Login: { screen: Login },
+  Home: { screen: Home },
+  Profile: { screen: Profile }
 };
 
-const NativeRoutes = StackNavigator(screens);
-
-export default NativeRoutes;
+export default screens;

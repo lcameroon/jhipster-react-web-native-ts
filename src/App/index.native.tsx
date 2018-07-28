@@ -1,65 +1,34 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Button, View, Text, StyleSheet } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import { login } from './shared/actions/auth.action';
+import { addNavigationHelpers, StackNavigator } from 'react-navigation';
+import { initializeListeners } from 'react-navigation-redux-helpers';
 
-import Header from './shared/components/Header';
+import RootNavigator from './routes/index.native';
+import { addListener } from './store/index.native';
 
-import {
-  selectIsAuthenticated,
-  selectAuthLoginError
-} from './shared/reducers/auth.reducer';
+export const AppNavigator = StackNavigator(RootNavigator);
 
-const mapStateToProps = (state: any) => ({
-  isAuthenticated: selectIsAuthenticated(state),
-  loginError: selectAuthLoginError(state)
-});
+class AppWithNavigationState extends React.Component<any, any> {
+  componentDidMount() {
+    initializeListeners('root', this.props.nav);
+  }
 
-const mapDispatchToProps = { login };
-
-@connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-class App extends Component<any, any> {
   render() {
-    const { isAuthenticated, navigation } = this.props;
-
-    if (isAuthenticated) {
-      return navigation.navigate('Dashboard');
-    }
-
+    const { dispatch, nav } = this.props;
     return (
-      <View style={styles.app}>
-        <Header />
-        <Button title="Login" onPress={() => this.props.login('admin', 'admin', false)} />
-        <Text style={styles.appIntro}>Hard coded username and password (admin)</Text>
-      </View>
+      <AppNavigator
+        navigation={addNavigationHelpers({
+          dispatch,
+          state: nav,
+          addListener
+        })}
+      />
     );
   }
 }
 
-const styles = StyleSheet.create({
-  app: {
-    flex: 1
-  },
-  appIntro: {
-    flex: 2,
-    fontSize: 14,
-    textAlign: 'center',
-    marginTop: 15,
-    marginBottom: 15
-  }
+const mapStateToProps = state => ({
+  nav: state.nav
 });
 
-export default StackNavigator(
-  {
-    App: {
-      screen: App
-    }
-  },
-  {
-    headerMode: 'none'
-  }
-);
+export default connect(mapStateToProps)(AppWithNavigationState);

@@ -1,54 +1,57 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Button, View, Text, StyleSheet } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-
+import { NavigationActions } from 'react-navigation';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import { logout } from '../../../../shared/actions/auth.action';
 import { selectIsAuthenticated } from '../../../../shared/reducers/auth.reducer';
 
-const mapStateToProps = (state: any) => ({
-  isAuthenticated: selectIsAuthenticated(state)
+const styles = StyleSheet.create({
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFF'
+  }
 });
-const mapDispatchToProps = { logout };
 
-@connect(
+const DashboardScreen: any = ({
+  profileScreen,
+  loginScreen,
+  isLoggedIn,
+  handleLogout
+}) => {
+  if (!isLoggedIn) {
+    loginScreen();
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.welcome}>{'You are "logged in" right now'}</Text>
+      <Button onPress={profileScreen} title="Profile" />
+      <Button onPress={handleLogout} title="Log out" />
+    </View>
+  );
+};
+
+DashboardScreen.navigationOptions = {
+  title: 'Dashboard'
+};
+
+const mapStateToProps = state => ({
+  isLoggedIn: selectIsAuthenticated(state)
+});
+const mapDispatchToProps = dispatch => ({
+  handleLogout: () => dispatch(logout()),
+  profileScreen: () => dispatch(NavigationActions.navigate({ routeName: 'Profile' })),
+  loginScreen: () => dispatch(NavigationActions.navigate({ routeName: 'Login' }))
+});
+
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)
-class DashboardScreen extends Component<any, any> {
-  handleLogout() {
-    const { navigation } = this.props;
-    this.props.logout();
-    setTimeout(() => {
-      return navigation.goBack(null);
-    }, 1000);
-  }
-
-  render() {
-    return (
-      <View>
-        <Text style={styles.header}>Dashboard</Text>
-        <Button title="Logout" onPress={() => this.handleLogout()} />
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  header: {
-    padding: 20,
-    fontSize: 24,
-    textAlign: 'center'
-  }
-});
-
-export default StackNavigator(
-  {
-    Home: {
-      screen: DashboardScreen
-    }
-  },
-  {
-    headerMode: 'none'
-  }
-);
+)(DashboardScreen);
