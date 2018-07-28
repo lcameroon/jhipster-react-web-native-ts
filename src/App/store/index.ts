@@ -9,13 +9,13 @@ import DevTools from '../shared/helpers/devtools.helper';
 // Middlewares
 import errorMiddleware from '../shared/middlewares/error.middleware';
 import loggerMiddleware from '../shared/middlewares/logger.middleware';
-// import notificationMiddleware from '../shared/middlewares/notification.middleware';
+import notificationMiddleware from '../shared/middlewares/notification.middleware';
 
 const defaultMiddlewares = [
   thunkMiddleware,
   errorMiddleware,
   loggerMiddleware,
-  // notificationMiddleware,
+  notificationMiddleware,
   promiseMiddleware(),
   loadingBarMiddleware()
 ];

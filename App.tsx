@@ -8,12 +8,12 @@ import setupAxiosInterceptors from './src/App/shared/interceptors/axios.intercep
 import initStore from './src/App/store';
 // Screens
 import App from './src/App';
-import Dashboard from './src/App/features/Home/containers/DashboardContainer';
+import Home from './src/App/features/Home/containers/HomeContainer';
 
 const RootStack = StackNavigator(
   {
     App,
-    Dashboard
+    Home
   },
   {
     initialRouteName: 'App'

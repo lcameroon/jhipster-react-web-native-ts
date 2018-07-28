@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { getSortState, IPaginationBaseState } from 'react-jhipster';
 
 import appConstants from '../../../../shared/constants';
-import { getUsers, updateUser } from '../actions';
+import { getUsers, updateUser, deleteUser } from '../actions';
 import { IRootState } from '../../../../reducers';
 import { selectUserManagementUsers, selectUserManagementTotalItems } from '../reducers';
 import { selectAuthUser } from '../../../../shared/reducers/auth.reducer';
@@ -48,6 +48,10 @@ export class UserManagementListContainer extends React.Component<
 
   handlePagination = activePage => this.setState({ activePage }, () => this.sortUsers());
 
+  confirmDelete = (useId: number) => {
+    this.props.deleteUser(useId);
+  };
+
   getUsers = () => {
     const { activePage, itemsPerPage, sort, order } = this.state;
     this.props.getUsers(activePage - 1, itemsPerPage, `${sort},${order}`);
@@ -70,6 +74,7 @@ export class UserManagementListContainer extends React.Component<
         account={account}
         sort={this.sort}
         handlePagination={this.handlePagination}
+        confirmDelete={this.confirmDelete}
         itemsPerPage={this.state.itemsPerPage}
         activePage={this.state.activePage}
         toggleActive={this.toggleActive}
@@ -84,7 +89,7 @@ const mapStateToProps = (state: IRootState) => ({
   account: selectAuthUser(state)
 });
 
-const mapDispatchToProps = { getUsers, updateUser };
+const mapDispatchToProps = { getUsers, updateUser, deleteUser };
 
 type StateProps = ReturnType<typeof mapStateToProps | any>;
 type DispatchProps = typeof mapDispatchToProps;

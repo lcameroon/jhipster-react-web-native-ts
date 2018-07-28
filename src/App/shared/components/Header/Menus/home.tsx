@@ -33,8 +33,8 @@ export const BrandLogo = props => (
 export const Brand = props => (
   <NavbarBrand tag={Link} to="/" className="brand-logo">
     <BrandLogo />
-    <span className="brand-title">Super App</span>
-    <span className="navbar-version">v{appConstants.version}</span>
+    <span className="brand-title d-inline-block">Super App</span>
+    <sub className="navbar-version">v{appConstants.version}</sub>
   </NavbarBrand>
 );
 

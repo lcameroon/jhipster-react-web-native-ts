@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { HashRouter as Router } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 import { IRootState } from './reducers';
 import { setLocale } from './shared/actions/locale.action';
@@ -28,6 +29,11 @@ export class App extends React.Component<IAppProps> {
     return (
       <Router>
         <div className="app-container" style={{ paddingTop }}>
+          <ToastContainer
+            position={toast.POSITION.TOP_RIGHT}
+            className="toastify-container"
+            toastClassName="toastify-toast"
+          />
           <ErrorBoundary>
             <Header
               isAuthenticated={this.props.isAuthenticated}

@@ -1,21 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Button, View, Text, StyleSheet } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import { logout } from '../../../../shared/actions/auth.action';
-import { selectIsAuthenticated } from '../../../../shared/reducers/auth.reducer';
-
-const mapStateToProps = (state: any) => ({
-  isAuthenticated: selectIsAuthenticated(state)
-});
-const mapDispatchToProps = { logout };
-
-@connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-class DashboardScreen extends Component<any, any> {
+class LandingPageScreen extends Component<any, any> {
   handleLogout() {
     const { navigation } = this.props;
     this.props.logout();
@@ -27,8 +14,9 @@ class DashboardScreen extends Component<any, any> {
   render() {
     return (
       <View>
-        <Text style={styles.header}>Dashboard</Text>
-        <Button title="Logout" onPress={() => this.handleLogout()} />
+        <Text style={styles.header}>Landing Page</Text>
+        <Button title="Login" onPress={() => {}} />
+        <Button title="Signup" onPress={() => {}} />
       </View>
     );
   }
@@ -45,7 +33,7 @@ const styles = StyleSheet.create({
 export default StackNavigator(
   {
     Home: {
-      screen: DashboardScreen
+      screen: LandingPageScreen
     }
   },
   {

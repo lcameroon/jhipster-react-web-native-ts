@@ -7,6 +7,8 @@ const appConstants = {
   buildNumber: process.env.BUILD_NUMBER || '0',
   buildTimestamp: process.env.BUILD_TIMESTAMP || new Date().getTime(),
   serverApiUrl: process.env.SERVER_API_URL || 'http://localhost:8080/',
+  errorMessage: `An error has occurred! Please try again later.`,
+  successMessage: `Your request has been completed successfully!`,
   itemsPerPage: 20,
   tokenKey: 'jhi-token',
   messages: {

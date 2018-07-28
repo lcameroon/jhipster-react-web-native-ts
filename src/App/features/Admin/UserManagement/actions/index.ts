@@ -7,6 +7,7 @@ import {
 } from 'react-jhipster';
 
 import { IUser } from '../models/user.model';
+import appConstants from '../../../../shared/constants';
 
 export const ACTION_TYPES = {
   FETCH_ROLES: 'userManagement/FETCH_ROLES',
@@ -19,6 +20,7 @@ export const ACTION_TYPES = {
 };
 
 const apiUrl = 'api/users';
+const { errorMessage } = appConstants;
 
 // Actions
 export const getUsers: ICrudGetAllAction<IUser> = (page, size, sort) => {
@@ -45,16 +47,25 @@ export const getUser: ICrudGetAction<IUser> = id => {
 export const createUser: ICrudPutAction<IUser> = user => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.CREATE_USER,
-    payload: axios.post(apiUrl, user)
+    payload: axios.post(apiUrl, user),
+    meta: {
+      successMessage: `User has been created successfully`,
+      errorMessage
+    }
   });
   dispatch(getUsers());
   return result;
 };
 
 export const updateUser: ICrudPutAction<IUser> = user => async dispatch => {
+  const requestUrl = `${apiUrl}/${user.id}`;
   const result = await dispatch({
     type: ACTION_TYPES.UPDATE_USER,
-    payload: axios.put(apiUrl, user)
+    payload: axios.put(requestUrl, user),
+    meta: {
+      successMessage: `User has been updated successfully`,
+      errorMessage
+    }
   });
   dispatch(getUsers());
   return result;
@@ -64,7 +75,11 @@ export const deleteUser: ICrudDeleteAction<IUser> = id => async dispatch => {
   const requestUrl = `${apiUrl}/${id}`;
   const result = await dispatch({
     type: ACTION_TYPES.DELETE_USER,
-    payload: axios.delete(requestUrl)
+    payload: axios.delete(requestUrl),
+    meta: {
+      successMessage: `User has been deleted successfully`,
+      errorMessage
+    }
   });
   dispatch(getUsers());
   return result;

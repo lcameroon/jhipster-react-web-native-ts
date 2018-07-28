@@ -7,14 +7,15 @@ export const ACTION_TYPES = {
   RESET: 'profile/RESET'
 };
 
-const apiUrl = 'api/profile';
+const apiUrl = 'api/account';
 
 export const saveProfileSettings = profile => async dispatch => {
+  const requestUrl = `${apiUrl}/${profile.id}`;
   await dispatch({
     type: ACTION_TYPES.UPDATE_ACCOUNT,
-    payload: axios.post(apiUrl, profile),
+    payload: axios.post(requestUrl, profile),
     meta: {
-      successMessage: `<strong>Settings saved!</strong>`
+      successMessage: `Settings saved!`
     }
   });
   dispatch(getSession());

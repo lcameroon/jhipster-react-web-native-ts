@@ -14,8 +14,8 @@ export const savePassword = (currentPassword, newPassword) => ({
     newPassword
   }),
   meta: {
-    successMessage: `<strong>Password changed!</strong>`,
-    errorMessage: `<strong>An error has occurred!</strong> The password could not be changed.`
+    successMessage: `Password changed!`,
+    errorMessage: `An error has occurred! The password could not be changed.`
   }
 });
 

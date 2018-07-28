@@ -5,7 +5,6 @@ import ErrorBoundaryRoute from '../../../../shared/helpers/error-boundary-route.
 import UserManagement from '../containers/UserManagementListContainer';
 import UserManagementDetail from '../containers/UserManagementDetailContainer';
 import UserManagementUpdate from '../containers/UserManagementFormContainer';
-import UserManagementDeleteModal from '../containers/UserManagementDeleteModalContainer';
 
 const Routes = ({ match }) => (
   <>
@@ -27,10 +26,6 @@ const Routes = ({ match }) => (
       />
       <ErrorBoundaryRoute path={match.url} component={UserManagement} />
     </Switch>
-    <ErrorBoundaryRoute
-      path={`${match.url}/:id/delete`}
-      component={UserManagementDeleteModal}
-    />
   </>
 );
 

@@ -17,9 +17,19 @@ export class UserManagementList extends React.Component<IUserManagementProps | a
       sort,
       toggleActive,
       handlePagination,
+      confirmDelete,
       itemsPerPage,
       activePage
     } = this.props;
+
+    const onConfirm = (id: number) => {
+      const isOk = confirm(
+        `Confirm delete operation\nAre you sure you want to delete this User?`
+      );
+      if (isOk) {
+        confirmDelete(id);
+      }
+    };
 
     return (
       <div>
@@ -142,8 +152,7 @@ export class UserManagementList extends React.Component<IUserManagementProps | a
                       <span className="d-none d-md-inline">Edit</span>
                     </Button>
                     <Button
-                      tag={Link}
-                      to={`${match.url}/${user.id}/delete`}
+                      onClick={() => onConfirm(user.id)}
                       color="danger"
                       size="sm"
                       disabled={account.login === user.login}

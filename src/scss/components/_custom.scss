@@ -1,13 +1,21 @@
 // custom styles goes here
 .col-form-label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 @include media-breakpoint-up(md) {
-    .modal-dialog {
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%) !important;
-    }
+  .modal-dialog {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+  }
+}
+
+.loading-bar {
+  height: 3px;
+  background-color: $primary;
+  position: absolute;
+  top: 0px;
+  z-index: $zindex-fixed + 1;
 }

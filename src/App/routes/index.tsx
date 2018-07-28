@@ -5,7 +5,7 @@ import Loadable from 'react-loadable';
 import Login from '../features/Login/containers/LoginContainer';
 import Register from '../features/Profile/containers/RegisterContainer';
 import Logout from '../features/Login/containers/LogoutContainer';
-import Dashboard from '../features/Home/containers/DashboardContainer';
+import Home from '../features/Home/containers/HomeContainer';
 import PrivateRoute from '../shared/helpers/private-route.helper';
 import ErrorBoundaryRoute from '../shared/helpers/error-boundary-route.helper';
 import appConstants from '../shared/constants';
@@ -39,7 +39,7 @@ const Routes = () => (
           appConstants.authorities.USER
         ]}
       />
-      <ErrorBoundaryRoute path="/" component={Dashboard} />
+      <ErrorBoundaryRoute path="/" component={Home} />
     </Switch>
   </div>
 );
