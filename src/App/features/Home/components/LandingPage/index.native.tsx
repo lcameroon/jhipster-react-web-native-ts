@@ -20,6 +20,10 @@ export class LandingScreen extends React.Component<IProps, IState> {
     this.props.navigation.navigate({ routeName: 'Login' });
   };
 
+  registerScreen = () => {
+    this.props.navigation.navigate({ routeName: 'Register' });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -27,7 +31,8 @@ export class LandingScreen extends React.Component<IProps, IState> {
           isLoggedIn{this.props.isLoggedIn ? ': YES' : ': NO'}
         </Text>
         <Text style={styles.welcome}>{'Landing Page'}</Text>
-        <Button onPress={this.loginScreen} title="Go to Login" />
+        <Button onPress={this.loginScreen} title="Go to Login Screen" />
+        <Button onPress={this.registerScreen} title="Go to Register Screen" />
       </View>
     );
   }

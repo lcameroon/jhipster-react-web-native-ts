@@ -13,38 +13,52 @@ import {
 import { AvForm, AvField, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
 
-export interface ILoginModalProps {
+import { ILoginProps } from '../../containers/LoginContainer';
+
+export interface ILoginState {
   showModal: boolean;
-  loginError: boolean;
-  handleLogin: Function;
-  handleClose: Function;
 }
 
-class LoginModal extends React.Component<ILoginModalProps> {
+class LoginModal extends React.Component<ILoginProps, ILoginState> {
+  state: ILoginState = {
+    showModal: this.props.showModal
+  };
+
+  componentDidUpdate(prevProps: ILoginProps, prevState) {
+    if (this.props !== prevProps) {
+      this.setState({ showModal: this.props.showModal });
+    }
+  }
+
+  handleLogin = (username, password, rememberMe = false) => {
+    this.props.login(username, password, rememberMe);
+  };
+
+  handleClose = () => {
+    this.setState({ showModal: false });
+  };
+
   handleSubmit = (event, errors, { username, password, rememberMe }) => {
-    const { handleLogin } = this.props;
-    handleLogin(username, password, rememberMe);
+    this.handleLogin(username, password, rememberMe);
   };
 
   render() {
-    const { loginError, handleClose } = this.props;
-
     return (
       <Modal
-        isOpen={this.props.showModal}
-        toggle={handleClose}
+        isOpen={this.state.showModal}
+        toggle={this.handleClose}
         backdrop="static"
         id="login-page"
         autoFocus={false}
       >
         <AvForm onSubmit={this.handleSubmit}>
-          <ModalHeader id="login-title" toggle={handleClose}>
+          <ModalHeader id="login-title" toggle={this.handleClose}>
             Sign in
           </ModalHeader>
           <ModalBody>
             <Row>
               <Col md="12">
-                {loginError ? (
+                {this.props.loginError ? (
                   <Alert color="danger">
                     <strong>Failed to sign in!</strong> Please check your credentials and
                     try again.
@@ -85,7 +99,7 @@ class LoginModal extends React.Component<ILoginModalProps> {
             </Alert>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" onClick={handleClose} tabIndex="1">
+            <Button color="secondary" onClick={this.handleClose} tabIndex="1">
               Cancel
             </Button>{' '}
             <Button color="primary" type="submit">
