@@ -15,12 +15,7 @@ const adminMenuItems = (
 );
 
 export const AdminMenu = () => (
-  <NavDropdown
-    icon="user-plus"
-    name="Administration"
-    style={{ width: '140%' }}
-    id="admin-menu"
-  >
+  <NavDropdown icon="shield-alt" name="Administration" id="admin-menu">
     {adminMenuItems}
   </NavDropdown>
 );

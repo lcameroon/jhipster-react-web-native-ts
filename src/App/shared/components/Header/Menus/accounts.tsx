@@ -3,11 +3,11 @@ import { NavItem, NavLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink as Link } from 'react-router-dom';
 
-export const ContatcsMenu = props => (
+export const AccountsMenu = props => (
   <NavItem className="ml-2">
-    <NavLink tag={Link} to="/contatcs" className="d-flex align-items-center">
+    <NavLink tag={Link} to="/accounts" className="d-flex align-items-center">
       <FontAwesomeIcon icon="book" />
-      <span className="ml-2">Contatcs</span>
+      <span className="ml-2">Accounts</span>
     </NavLink>
   </NavItem>
 );

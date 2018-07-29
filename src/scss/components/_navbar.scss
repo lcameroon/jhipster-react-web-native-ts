@@ -1,18 +1,23 @@
 // navbar styles
 .brand-logo {
-  width: 170px;
-  font-size: 1.45rem;
   line-height: 1;
   .brand-icon {
     display: inline-block;
-    vertical-align: text-bottom;
+    vertical-align: middle;
     img {
       width: 40px;
     }
+  }
+  .brand-title {
+    font-size: 1.7rem;
+    display: inline-block;
+    vertical-align: middle;
   }
   .navbar-version {
     font-size: 0.5em;
     margin-left: 15px;
     opacity: 0.5;
+    vertical-align: sub;
+    display: inline-block;
   }
 }

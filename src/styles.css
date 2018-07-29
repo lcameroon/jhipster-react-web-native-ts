@@ -6704,18 +6704,22 @@ a.text-dark:hover, a.text-dark:focus {
   animation-name: Toastify__slideOutDown; }
 
 .brand-logo {
-  width: 170px;
-  font-size: 1.45rem;
   line-height: 1; }
   .brand-logo .brand-icon {
     display: inline-block;
-    vertical-align: text-bottom; }
+    vertical-align: middle; }
     .brand-logo .brand-icon img {
       width: 40px; }
+  .brand-logo .brand-title {
+    font-size: 1.7rem;
+    display: inline-block;
+    vertical-align: middle; }
   .brand-logo .navbar-version {
     font-size: 0.5em;
     margin-left: 15px;
-    opacity: 0.5; }
+    opacity: 0.5;
+    vertical-align: sub;
+    display: inline-block; }
 
 @font-face {
   font-family: "Source Sans Pro";

@@ -2,7 +2,7 @@ import React from 'react';
 import LoadingBar from 'react-redux-loading-bar';
 import { Navbar, Nav, NavbarToggler, Collapse } from 'reactstrap';
 
-import { Home, Brand, LocaleMenu, AdminMenu, ContatcsMenu, ProfileMenu } from './Menus';
+import { Home, Brand, LocaleMenu, AdminMenu, AccountsMenu, ProfileMenu } from './Menus';
 
 export interface IHeaderProps {
   isAuthenticated?: boolean;
@@ -44,7 +44,7 @@ export default class Header extends React.Component<IHeaderProps, IHeaderState> 
             <Collapse isOpen={this.state.menuOpen} navbar>
               <Nav id="header-tabs" className="ml-auto" navbar>
                 <Home />
-                {isAuthenticated && <ContatcsMenu />}
+                {isAuthenticated && <AccountsMenu />}
                 {isAuthenticated && isAdmin && <AdminMenu />}
                 <LocaleMenu
                   currentLocale={currentLocale}

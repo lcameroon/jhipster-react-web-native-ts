@@ -8,13 +8,16 @@ import { NavDropdown } from './home';
 const profileMenuItemsAuthenticated = (
   <>
     <DropdownItem tag={Link} to="/profile/settings">
-      <FontAwesomeIcon icon="wrench" /> Settings
+      <FontAwesomeIcon icon="wrench" />
+      <span className="ml-2">Settings</span>
     </DropdownItem>
     <DropdownItem tag={Link} to="/profile/password">
-      <FontAwesomeIcon icon="clock" /> Password
+      <FontAwesomeIcon icon="clock" />
+      <span className="ml-2">Password</span>
     </DropdownItem>
     <DropdownItem tag={Link} to="/logout">
-      <FontAwesomeIcon icon="sign-out-alt" /> Sign out
+      <FontAwesomeIcon icon="sign-out-alt" />
+      <span className="ml-2">Sign out</span>
     </DropdownItem>
   </>
 );
@@ -22,16 +25,20 @@ const profileMenuItemsAuthenticated = (
 const profileMenuItems = (
   <>
     <DropdownItem id="login-item" tag={Link} to="/login">
-      <FontAwesomeIcon icon="sign-in-alt" /> Sign in
+      <span className="d-inline-block" style={{ width: 20 }}>
+        <FontAwesomeIcon icon="sign-in-alt" />
+      </span>
+      <span className="ml-2">Log in</span>
     </DropdownItem>
     <DropdownItem tag={Link} to="/register">
-      <FontAwesomeIcon icon="sign-in-alt" /> Register
+      <FontAwesomeIcon icon="user-plus" />
+      <span className="ml-2">Register</span>
     </DropdownItem>
   </>
 );
 
 export const ProfileMenu = ({ isAuthenticated = false }) => (
-  <NavDropdown icon="user" name="Profile" id="profile-menu">
+  <NavDropdown icon="user-circle" name="Profile" id="profile-menu">
     {isAuthenticated ? profileMenuItemsAuthenticated : profileMenuItems}
   </NavDropdown>
 );
