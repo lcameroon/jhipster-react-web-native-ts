@@ -1,55 +1,55 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavigationActions } from 'react-navigation';
 import { StyleSheet, View, Text, Button } from 'react-native';
+
+import { IRootState } from '../../../../reducers';
+import { INavigationOptions } from '../../../../routes/index.native';
 import { logout } from '../../../../shared/actions/auth.action';
 import { selectIsAuthenticated } from '../../../../shared/reducers/auth.reducer';
+import theme from '../../../../theme';
 
-const styles = StyleSheet.create({
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFF'
-  }
-});
+const styles = StyleSheet.create(theme.components);
 
-const DashboardScreen: any = ({
-  profileScreen,
-  loginScreen,
-  isLoggedIn,
-  handleLogout
-}) => {
-  if (!isLoggedIn) {
-    loginScreen();
+export interface IProps extends StateProps, DispatchProps, INavigationOptions {}
+export interface IState {}
+
+export class DashboardScreen extends React.Component<IProps, IState> {
+  static navigationOptions = {
+    title: 'Dashboard'
+  };
+
+  componentDidMount() {
+    if (!this.props.isLoggedIn) {
+      this.loginScreen();
+    }
   }
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.welcome}>{'You are "logged in" right now'}</Text>
-      <Button onPress={profileScreen} title="Profile" />
-      <Button onPress={handleLogout} title="Log out" />
-    </View>
-  );
-};
+  profileScreen = () => {
+    this.props.navigation.navigate({ routeName: 'Profile' });
+  };
 
-DashboardScreen.navigationOptions = {
-  title: 'Dashboard'
-};
+  loginScreen = () => {
+    this.props.navigation.navigate({ routeName: 'Login' });
+  };
 
-const mapStateToProps = state => ({
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>{'You are "logged in" right now'}</Text>
+        <Button onPress={this.profileScreen} title="Profile" />
+        <Button onPress={this.props.logout} title="Log out" />
+      </View>
+    );
+  }
+}
+
+const mapStateToProps = (state: IRootState) => ({
   isLoggedIn: selectIsAuthenticated(state)
 });
-const mapDispatchToProps = dispatch => ({
-  handleLogout: () => dispatch(logout()),
-  profileScreen: () => dispatch(NavigationActions.navigate({ routeName: 'Profile' })),
-  loginScreen: () => dispatch(NavigationActions.navigate({ routeName: 'Login' }))
-});
+const mapDispatchToProps = { logout };
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = typeof mapDispatchToProps;
 
 export default connect(
   mapStateToProps,

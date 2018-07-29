@@ -2,8 +2,16 @@
 import color from './colors';
 import components from './components';
 
-export default {
-  ...components,
+export interface ITheme {
+  components: any;
+  colors: any;
+  bodyBg: any;
+  bodyColor: any;
+  gutter: number;
+}
+
+const theme: ITheme = {
+  components,
   colors: {
     primary: color.blue,
     secondary: color.gray600,
@@ -18,3 +26,5 @@ export default {
   bodyColor: color.gray900,
   gutter: 10
 };
+
+export default theme;

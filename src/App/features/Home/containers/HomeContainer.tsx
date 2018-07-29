@@ -23,7 +23,11 @@ export class HomeContainer extends React.Component<
   render() {
     const { isAuthenticated } = this.props;
 
-    return isAuthenticated ? <Dashboard /> : <LandingPage />;
+    return isAuthenticated ? (
+      <Dashboard {...this.props} />
+    ) : (
+      <LandingPage {...this.props} />
+    );
   }
 }
 

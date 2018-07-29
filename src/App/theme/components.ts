@@ -1,8 +1,15 @@
 import color from 'color';
 
 export default {
-  card: {
-    backgroundColor: color.white,
-    borderColor: color.gray300
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.white
   }
 };
