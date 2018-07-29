@@ -12,7 +12,7 @@ const profileMenuItemsAuthenticated = (
       <span className="ml-2">Settings</span>
     </DropdownItem>
     <DropdownItem tag={Link} to="/profile/password">
-      <FontAwesomeIcon icon="clock" />
+      <FontAwesomeIcon icon="lock" />
       <span className="ml-2">Password</span>
     </DropdownItem>
     <DropdownItem tag={Link} to="/logout">
