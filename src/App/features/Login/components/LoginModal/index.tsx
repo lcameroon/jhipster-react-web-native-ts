@@ -10,6 +10,7 @@ import {
   Row,
   Col
 } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 import { AvForm, AvField, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
 
@@ -43,6 +44,13 @@ class LoginModal extends React.Component<ILoginProps, ILoginState> {
   };
 
   render() {
+    const { isAuthenticated } = this.props;
+    const { from } = this.props['location'].state || {
+      from: { pathname: '/', search: this.props['location'].search }
+    };
+    if (isAuthenticated) {
+      return <Redirect to={from} />;
+    }
     return (
       <Modal
         isOpen={this.state.showModal}
