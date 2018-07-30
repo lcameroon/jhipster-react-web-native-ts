@@ -25,7 +25,7 @@ npm install
 ### Run Mock server (Fake Api)
 
 ```
-npm mock:server
+npm run mock:server
 ```
 
 ### Run Web
